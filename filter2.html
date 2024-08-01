@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Roboto', sans-serif;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: auto;
+            font-family: 'Roboto', sans-serif;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+        }
+        button {
+            background: #EC6D2E;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #EC6D2E;
+        }
+    </style>
+</head>
+<body>
+    <form id="dynamicForm">
+        <select id="province" name="province" required>
+            <option value="">Select Province</option>
+            <option value="1">Koshi</option>
+            <option value="2">Madesh</option>
+            <option value="3">Bagmati</option>
+            <option value="4">Gandaki</option>
+            <option value="5">Lumbini</option>
+            <option value="6">Karnali</option>
+            <option value="7">Sudurpaschim</option>
+        </select>
+
+        <select id="district" name="district" required>
+            <option value="">Select District</option>
+        </select>
+
+        <select id="seedBank" name="seedBank" required>
+            <option value="">Select Community Seed Bank</option>
+        </select>
+
+        <select id="cropSpecies" name="cropSpecies" required>
+            <option value="">Select Crop Species</option>
+            <option value="dummy1">Dummy Crop 1</option>
+            <option value="dummy2">Dummy Crop 2</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const districts = [
+            // Koshi
+            { province_id: '1', id: '1', name_en: 'Sankhuwasabha' },
+            { province_id: '1', id: '2', name_en: 'Jhapa' },
+            { province_id: '1', id: '3', name_en: 'Morang' },
+            // Madesh
+            { province_id: '2', id: '4', name_en: 'Bara' },
+            // Bagmati
+            { province_id: '3', id: '5', name_en: 'Dolakha' },
+            { province_id: '3', id: '6', name_en: 'Sundhupalchok' },
+            { province_id: '3', id: '7', name_en: 'Lalitpur' },
+            { province_id: '3', id: '8', name_en: 'Dhading' },
+            // Gandaki
+            { province_id: '4', id: '9', name_en: 'Lamjung' },
+            { province_id: '4', id: '10', name_en: 'Tanahun' },
+            { province_id: '4', id: '11', name_en: 'Nawalparasi' },
+            { province_id: '4', id: '12', name_en: 'Kaski' },
+            // Lumbini
+            { province_id: '5', id: '13', name_en: 'Banke' },
+            { province_id: '5', id: '14', name_en: 'Bardiya' },
+            { province_id: '5', id: '15', name_en: 'Dang' },
+            // Karnali
+            { province_id: '6', id: '16', name_en: 'Jumla' },
+            { province_id: '6', id: '17', name_en: 'Humla' },
+            // Sudurpaschim
+            { province_id: '7', id: '18', name_en: 'Kailali' },
+            { province_id: '7', id: '19', name_en: 'Kanchanpur' },
+            { province_id: '7', id: '20', name_en: 'Doti' },
+            { province_id: '7', id: '21', name_en: 'Achham' }
+        ];
+
+        const seedBanks = {
+            koshi: [
+                { name: 'Tamaphok Community Seed Bank', value: 'tamaphok' },
+                { name: 'Shivagunj Community Seed Bank', value: 'shivagunj' },
+                { name: 'Charpate Community Seed Bank', value: 'charpate' }
+            ],
+            madesh: [
+                { name: 'Kachorwa Community Seed Bank', value: 'kachorwa' }
+            ],
+            bagmati: [
+                { name: 'Jungu Community Seed Bank', value: 'jungu' },
+                { name: 'Pingdanda Community Seed Bank', value: 'pingdanda' },
+                { name: 'Dalchoki Community Seed Bank', value: 'dalchoki' },
+                { name: 'Jogimara Community Seed Bank', value: 'jogimara' }
+            ],
+            gandaki: [
+                { name: 'Ghanpokhara Community Seed Bank', value: 'ghanpokhara' },
+                { name: 'Purkot Community Seed Bank', value: 'purkot' },
+                { name: 'Agyauli Community Seed Bank', value: 'agyauli' },
+                { name: 'Namuna Prangarik Community Seed Bank', value: 'namuna_prangarik' },
+                { name: 'Biological Resources Conservation Movement', value: 'biological_resources' },
+                { name: 'Annapurna Community Seed Bank', value: 'annapurna' }
+            ],
+            lumbini: [
+                { name: 'Janajagaran Community Seed Bank', value: 'janajagaran' },
+                { name: 'Mohammadpur Community Seed Bank', value: 'mohammadpur' },
+                { name: 'Sunaulo Community Seed Bank', value: 'sunaulo' },
+                { name: 'Belawa Community Seed Bank', value: 'belawa' }
+            ],
+            karnali: [
+                { name: 'Hanku Community Seed Bank', value: 'hanku' },
+                { name: 'Chhinra Community Seed Bank', value: 'chhinra' }
+            ],
+            sudurpaschim: [
+                { name: 'Masuriya Community Seed Bank', value: 'masuriya' },
+                { name: 'Joshipur Community Seed Bank', value: 'joshipur' },
+                { name: 'Jay Fulbari Community Seed Bank', value: 'jay_fulbari' },
+                { name: 'Anamol Community Seed Bank', value: 'anamol' },
+                { name: 'Ghanteshwor Community Seed Bank', value: 'ghanteshwor' },
+                { name: 'Janalikot Community Seed Bank', value: 'janalikot' }
+            ]
+        };
+
+        document.getElementById('province').addEventListener('change', function() {
+            const provinceId = this.value;
+            const districtSelect = document.getElementById('district');
+            const seedBankSelect = document.getElementById('seedBank');
+
+            // Filter districts based on selected province
+            const filteredDistricts = districts.filter(district => district.province_id == provinceId);
+
+            // Clear existing options
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+            seedBankSelect.innerHTML = '<option value="">Select Community Seed Bank</option>';
+
+            // Populate district options
+            filteredDistricts.forEach(district => {
+                const option = document.createElement('option');
+                option.value = district.id;
+                option.textContent = district.name_en;
+                districtSelect.appendChild(option);
+            });
+
+            // Populate community seed bank options
+            const provinceKey = getProvinceKey(provinceId);
+            if (provinceKey && seedBanks[provinceKey]) {
+                seedBanks[provinceKey].forEach(seedBank => {
+                    const option = document.createElement('option');
+                    option.value = seedBank.value;
+                    option.textContent = seedBank.name;
+                    seedBankSelect.appendChild(option);
+                });
+            }
+        });
+
+        function getProvinceKey(provinceId) {
+            switch(provinceId) {
+                case '1': return 'koshi';
+                case '2': return 'madesh';
+                case '3': return 'bagmati';
+                case '4': return 'gandaki';
+                case '5': return 'lumbini';
+                case '6': return 'karnali';
+                case '7': return 'sudurpaschim';
+                default: return null;
+            }
+        }
+
+        document.getElementById('dynamicForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const province = document.getElementById('province').value;
+            const district = document.getElementById('district').value;
+            const seedBank = document.getElementById('seedBank').value;
+            const cropSpecies = document.getElementById('cropSpecies').value;
+
+            const data = { province, district, seedBank, cropSpecies };
+            const url = 'YOUR_URL_HERE'; // Replace with your actual URL
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Form submitted successfully!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+    });
+    </script>
+</body>
+</html>
