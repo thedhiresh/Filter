@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter</title>
+    <style>
+     
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: ;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        #myUL {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myUL li {
+            border-bottom: 1px solid #ddd;
+        }
+
+        #myUL li a {
+            display: block;
+            padding: 12px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #myUL li a:hover {
+            background-color: #eee;
+            color: #ED6D2E;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <ul id="myUL">
+            <li><a href="https://csbnepal.org/seed-library-koshi-province/">Koshi Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-madesh-province/">Madesh Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-bagmati-province/">Bagmati Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-gandaki-province/">Gandaki Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-lumbini-province/">Lumbini Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-karnali-province/">Karnali Province</a></li>
+            <li><a href="https://csbnepal.org/seed-library-sudurpaschim-province/">Sudurpaschim Province</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>
